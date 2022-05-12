@@ -40,3 +40,20 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+
+@app.post("/receipts/", response_model=schemas.Receipt)
+def create_receipt(receipt: schemas.ReceiptCreate, db: Session = Depends(get_db)):
+    db_user = crud.get_user(db=db, user_id=receipt.owner_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return crud.create_receipt(db=db, receipt=receipt)
+
+
+@app.get("/receipts/{receipt_id}", response_model=schemas.Receipt)
+def read_receipt(receipt_id: int, db: Session = Depends(get_db)):
+    db_receipt = crud.get_receipt_by_id(db, receipt_id=receipt_id)
+    if db_receipt is None:
+        raise HTTPException(status_code=404, detail="Receipt not found")
+    return db_receipt
