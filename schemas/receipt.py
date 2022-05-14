@@ -2,22 +2,7 @@ from datetime import date, datetime
 from typing import Optional, List
 from pydantic import BaseModel
 from fastapi import Body
-
-
-class UserBase(BaseModel):
-    email: str
-
-
-class UserCreate(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
-
-    class Config:
-        orm_mode = True
+from .product import Product
 
 
 class ReceiptBase(BaseModel):
@@ -31,24 +16,6 @@ class ReceiptBase(BaseModel):
 
 class ReceiptCreate(ReceiptBase):
     owner_id: int
-
-
-class ProductBase(BaseModel):
-    name: str
-    price: float
-    amount: float
-    receipt_id: int
-
-
-class ProductCreate(ProductBase):
-    pass
-
-
-class Product(ProductBase):
-    id: int
-
-    class Config:
-        orm_mode = True
 
 
 class Receipt(ReceiptBase):
