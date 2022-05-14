@@ -35,16 +35,20 @@ class ReceiptCreate(ReceiptBase):
 
 class ProductBase(BaseModel):
     name: str
-    price: int
-    amount: int
-
-
-class ProductCreate(ProductBase):
+    price: float
+    amount: float
     receipt_id: int
 
 
-class Product(ProductCreate):
+class ProductCreate(ProductBase):
+    pass
+
+
+class Product(ProductBase):
     id: int
+
+    class Config:
+        orm_mode = True
 
 
 class Receipt(ReceiptBase):

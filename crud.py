@@ -24,6 +24,10 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 
+def get_receipts(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Receipt).offset(skip).limit(limit).all()
+
+
 def get_receipt_by_id(db: Session, receipt_id: int):
     return db.query(models.Receipt).filter(models.Receipt.id == receipt_id).first()
 
@@ -40,3 +44,16 @@ def create_receipt(db: Session, receipt: schemas.ReceiptCreate):
     db.commit()
     db.refresh(db_receipt)
     return db_receipt
+
+
+def create_product(db: Session, product: schemas.ProductCreate):
+    db_product = models.Product(name=product.name, price=product.price,
+                                amount=product.amount, receipt_id=product.receipt_id)
+    db.add(db_product)
+    db.commit()
+    db.refresh(db_product)
+    return db_product
+
+
+def get_products_by_receipt_id(db: Session, receipt_id: int):
+    return db.query(models.Product).filter(models.Product.receipt_id == receipt_id).all()

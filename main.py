@@ -42,6 +42,12 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
+@app.get("/receipts/", response_model=list[schemas.Receipt])
+def read_receipts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    receipts = crud.get_receipts(db, skip=skip, limit=limit)
+    return receipts
+
+
 @app.post("/receipts/", response_model=schemas.Receipt)
 def create_receipt(receipt: schemas.ReceiptCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user(db=db, user_id=receipt.owner_id)
@@ -57,3 +63,16 @@ def read_receipt(receipt_id: int, db: Session = Depends(get_db)):
     if db_receipt is None:
         raise HTTPException(status_code=404, detail="Receipt not found")
     return db_receipt
+
+
+@app.post("/products/", response_model=schemas.Product)
+def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
+    return crud.create_product(db=db, product=product)
+
+
+@app.get("/products/{receipt_id}", response_model=list[schemas.Product])
+def read_product(receipt_id: int, db: Session = Depends(get_db)):
+    db_product = crud.get_products_by_receipt_id(db=db, receipt_id=receipt_id)
+    if db_product is None:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return db_product
