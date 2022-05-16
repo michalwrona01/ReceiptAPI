@@ -3,7 +3,7 @@ from db import models
 from schemas.product import ProductCreate
 
 
-def create_product(db: Session, product: ProductCreate):
+def post_product(db: Session, product: ProductCreate):
     db_product = models.Product(name=product.name, price=product.price,
                                 amount=product.amount, receipt_id=product.receipt_id)
     db.add(db_product)
