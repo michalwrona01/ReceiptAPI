@@ -2,7 +2,7 @@ from datetime import date, datetime
 from typing import Optional, List
 from pydantic import BaseModel
 from fastapi import Body
-from .product import Product
+from schemas.product import Product
 
 
 class ReceiptBase(BaseModel):
@@ -25,3 +25,7 @@ class Receipt(ReceiptBase):
 
     class Config:
         orm_mode = True
+
+
+class ReceiptCreateByImage(BaseModel):
+    owner_id: int
