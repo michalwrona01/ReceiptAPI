@@ -1,4 +1,5 @@
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, UploadFile, File
+from receipt_ocr.ocr import ocr_receipt
 from schemas.receipt import Receipt, ReceiptCreate
 from sqlalchemy.orm import Session
 from db.database import get_db
@@ -20,6 +21,15 @@ def create_receipt(receipt: ReceiptCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
     return post_receipt(db=db, receipt=receipt)
+
+
+@app.post("/receipts-image/")
+def create_receipt(file: UploadFile = File(...)):
+    if file is None:
+        raise HTTPException(status_code=404, detail="Image is empty")
+    text = ocr_receipt(file)
+
+    return {'text': text}
 
 
 @app.get("/receipts/{receipt_id}", response_model=Receipt)

@@ -23,3 +23,7 @@ def post_receipt(db: Session, receipt: ReceiptCreate):
     db.commit()
     db.refresh(db_receipt)
     return db_receipt
+
+
+def post_receipt_by_image():
+    pass
