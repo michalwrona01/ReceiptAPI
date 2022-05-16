@@ -26,15 +26,4 @@ def post_receipt(db: Session, receipt: ReceiptCreate):
 
 
 def post_receipt_by_image(db: Session, receipts_data):
-    # db_receipt = models.Receipt(shop_name=receipt.shop_name,
-    #                             address=receipt.address,
-    #                             date_add_receipt=receipt.date_add_receipt,
-    #                             date_shop_products=receipt.date_shop_products,
-    #                             number_receipt=receipt.number_receipt,
-    #                             NIP_number_shop=receipt.NIP_number_shop,
-    #                             owner_id=receipt.owner_id)
-    # db.add(db_receipt)
-    # db.commit()
-    # db.refresh(db_receipt)
-    # return db_receipt
     pass
