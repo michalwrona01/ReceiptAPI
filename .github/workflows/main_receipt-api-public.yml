@@ -17,12 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install Tesseract
-        run: sudo apt install tesseract-ocr
-        
-      - name: Install POL lang for Tesseract
-        run: sudo apt-get install tesseract-ocr-pol
-      
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -54,11 +48,17 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Install Tesseract
+        run: sudo apt install tesseract-ocr
+
+      - name: Install POL lang for Tesseract
+        run: sudo apt-get install tesseract-ocr-pol
+
       - name: Apt Update
         run: sudo apt-get update
       
       - name: Install depends for tesseract
-        run: sudo apt-get install ffmpeg libsm6 libxext6  -y
+        run: apt-get update && apt-get install -y python3-opencv
     
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
