@@ -16,6 +16,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Install Tesseract
+        run: sudo apt install tesseract-ocr
+        
+      - name: Install POL lang for Tesseract
+        run: sudo apt-get install tesseract-ocr-pol
 
       - name: Set up Python version
         uses: actions/setup-python@v1
@@ -26,6 +32,9 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
+          
+      - name: Install opencv-python
+        run: pip install opencv-python
       
       - name: Install dependencies
         run: pip install -r requirements.txt
