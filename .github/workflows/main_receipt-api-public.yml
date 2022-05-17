@@ -17,12 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: Apt Update
+        run: apt-get update
+      
+      - name: Install depends for tesseract
+        run: apt-get install ffmpeg libsm6 libxext6  -y
+      
       - name: Install Tesseract
         run: sudo apt install tesseract-ocr
         
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
-
+        
+      - name: Apt Update v2
+        run: apt-get update
+      
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
