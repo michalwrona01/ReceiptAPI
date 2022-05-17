@@ -53,12 +53,6 @@ jobs:
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
-
-      - name: Apt Update
-        run: sudo apt-get update
-      
-      - name: Install depends for tesseract
-        run: sudo apt-get update && sudo apt-get install -y python3-opencv
     
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
