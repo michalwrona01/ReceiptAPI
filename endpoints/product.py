@@ -3,12 +3,12 @@ from fastapi import Depends, HTTPException
 from db.database import get_db
 from sqlalchemy.orm import Session
 from main import app
-from crud.product import post_product, get_products_by_receipt_id
+from crud.product import create_product, get_products_by_receipt_id
 
 
 @app.post("/products/", response_model=Product)
 def create_product(product: ProductCreate, db: Session = Depends(get_db)):
-    return post_product(db=db, product=product)
+    return create_product(db=db, product=product)
 
 
 @app.get("/products/{receipt_id}", response_model=list[Product])

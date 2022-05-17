@@ -3,8 +3,8 @@ from receipt_ocr.ocr import ocr_receipt
 from schemas.receipt import Receipt, ReceiptCreate
 from sqlalchemy.orm import Session
 from db.database import get_db
-from crud.receipt import get_receipts, get_receipt_by_id, post_receipt
-from crud.user import get_user_by_id
+from crud.receipt import get_receipts, get_receipt_by_id
+from crud.user import get_user
 from main import app
 
 
@@ -16,11 +16,11 @@ def read_receipts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 
 @app.post("/receipts/", response_model=Receipt)
 def create_receipt(receipt: ReceiptCreate, db: Session = Depends(get_db)):
-    db_user = get_user_by_id(db=db, user_id=receipt.owner_id)
+    db_user = get_user(db=db, user_id=receipt.owner_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
 
-    return post_receipt(db=db, receipt=receipt)
+    return create_receipt(db=db, receipt=receipt)
 
 
 @app.post("/receipts-image/")
