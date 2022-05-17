@@ -58,7 +58,7 @@ jobs:
         run: sudo apt-get update
       
       - name: Install depends for tesseract
-        run: apt-get update && apt-get install -y python3-opencv
+        run: sudo apt-get update && sudo apt-get install -y python3-opencv
     
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
