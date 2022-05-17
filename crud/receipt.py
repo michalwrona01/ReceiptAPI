@@ -11,7 +11,7 @@ def get_receipt_by_id(db: Session, receipt_id: int):
     return db.query(models.Receipt).filter(models.Receipt.id == receipt_id).first()
 
 
-def create_receipt(db: Session, receipt: ReceiptCreate):
+def post_receipt(db: Session, receipt: ReceiptCreate):
     db_receipt = models.Receipt(shop_name=receipt.shop_name,
                                 address=receipt.address,
                                 date_add_receipt=receipt.date_add_receipt,
