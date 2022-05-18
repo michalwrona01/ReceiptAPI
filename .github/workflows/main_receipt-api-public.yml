@@ -17,18 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install libleptonica-dev
-        run: sudo apt-get install libleptonica-dev
-    
-      - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr
-
-      - name: Install POL lang for Tesseract
-        run: sudo apt-get install tesseract-ocr-pol
-        
-      - name: Install libtesseract-dev
-        run: sudo apt-get install libtesseract-dev
-      
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -41,6 +29,12 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+        
+      - name: Install Tesseract
+        run: apt install tesseract-ocr
+      
+      - name: Install POL lang for Tesseract
+        run: apt-get install tesseract-ocr-pol
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
@@ -60,18 +54,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Install libleptonica-dev
-        run: sudo apt-get install libleptonica-dev
-    
-      - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr
-
-      - name: Install POL lang for Tesseract
-        run: sudo apt-get install tesseract-ocr-pol
-        
-      - name: Install libtesseract-dev
-        run: sudo apt-get install libtesseract-dev
-    
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
