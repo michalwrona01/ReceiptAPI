@@ -41,10 +41,10 @@ jobs:
             !venv/
           
       - name: Install Tesseract
-        run: apt install tesseract-ocr
+        run: sudo apt install tesseract-ocr
       
       - name: Install POL lang for Tesseract
-        run: apt-get install tesseract-ocr-pol
+        run: sudo apt-get install tesseract-ocr-pol
 
   deploy:
     runs-on: ubuntu-latest
