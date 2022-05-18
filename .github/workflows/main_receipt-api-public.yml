@@ -17,20 +17,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: Install libleptonica-dev
+        run: sudo apt-get install libleptonica-dev
+    
       - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr -y
-
-      - name: Install additional libraries
-        run: sudo apt-get install libicu-dev libicu-dev libcairo2-dev
-
-      - name: Dependencies for Tesseract
-        run: sudo apt-get install libtesseract-dev -y
+        run: sudo apt-get install tesseract-ocr
+        
+      - name: Install Tesseract dev
+        run: sudo apt-get install tesseract-ocr-dev
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
-
-      - name: Install imagemagick
-        run: sudo apt-get install imagemagick
+        
+      - name: Install libtesseract-dev
+        run: sudo apt-get install libtesseract-dev
       
       - name: Set up Python version
         uses: actions/setup-python@v1
@@ -63,20 +63,20 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Install libleptonica-dev
+        run: sudo apt-get install libleptonica-dev
+    
       - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr -y
-
-      - name: Install additional libraries
-        run: sudo apt-get install libicu-dev libicu-dev libcairo2-dev
-      
-      - name: Dependencies for Tesseract
-        run: sudo apt-get install libtesseract-dev -y
+        run: sudo apt-get install tesseract-ocr
+        
+      - name: Install Tesseract dev
+        run: sudo apt-get install tesseract-ocr-dev
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
-
-      - name: Install imagemagick
-        run: sudo apt-get install imagemagick
+        
+      - name: Install libtesseract-dev
+        run: sudo apt-get install libtesseract-dev
     
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
