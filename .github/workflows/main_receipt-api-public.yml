@@ -19,6 +19,9 @@ jobs:
       
       - name: Install Tesseract
         run: sudo apt-get install tesseract-ocr
+        
+      - name: Dependencies for Tesseract
+        run: sudo apt-get install libtesseract-dev
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
@@ -56,6 +59,9 @@ jobs:
     steps:
       - name: Install Tesseract
         run: sudo apt-get install tesseract-ocr
+      
+      - name: Dependencies for Tesseract
+        run: sudo apt-get install libtesseract-dev
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
