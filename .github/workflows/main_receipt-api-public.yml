@@ -21,7 +21,7 @@ jobs:
         run: sudo apt-get install tesseract-ocr -y
 
       - name: Install additional libraries
-        run: sudo apt install libicu-dev libicu-dev libcairo2-dev
+        run: sudo apt-get install libicu-dev libicu-dev libcairo2-dev
 
       - name: Dependencies for Tesseract
         run: sudo apt-get install libtesseract-dev -y
@@ -67,7 +67,7 @@ jobs:
         run: sudo apt-get install tesseract-ocr -y
 
       - name: Install additional libraries
-        run: sudo apt install libicu-dev libicu-dev libcairo2-dev
+        run: sudo apt-get install libicu-dev libicu-dev libcairo2-dev
       
       - name: Dependencies for Tesseract
         run: sudo apt-get install libtesseract-dev -y
