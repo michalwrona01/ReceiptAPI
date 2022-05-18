@@ -21,7 +21,7 @@ jobs:
         run: sudo apt-get install libleptonica-dev
     
       - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr tesseract-ocr-dev
+        run: sudo apt-get install tesseract-ocr
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
@@ -64,7 +64,7 @@ jobs:
         run: sudo apt-get install libleptonica-dev
     
       - name: Install Tesseract
-        run: sudo apt-get install tesseract-ocr tesseract-ocr-dev
+        run: sudo apt-get install tesseract-ocr
 
       - name: Install POL lang for Tesseract
         run: sudo apt-get install tesseract-ocr-pol
