@@ -30,12 +30,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      - name: Install Tesseract
-        run: sudo apt install tesseract-ocr
-      
-      - name: Install POL lang for Tesseract
-        run: sudo apt-get install tesseract-ocr-pol
-        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
       - name: Upload artifact for deployment jobs
@@ -45,6 +39,12 @@ jobs:
           path: |
             . 
             !venv/
+          
+      - name: Install Tesseract
+        run: apt install tesseract-ocr
+      
+      - name: Install POL lang for Tesseract
+        run: apt-get install tesseract-ocr-pol
 
   deploy:
     runs-on: ubuntu-latest
