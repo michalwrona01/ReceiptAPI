@@ -1,11 +1,12 @@
 from fastapi import Depends, HTTPException, UploadFile, File
-from receipt_ocr.ocr import ocr_receipt
 from schemas.receipt import Receipt, ReceiptCreate
 from sqlalchemy.orm import Session
 from db.database import get_db
 from crud.receipt import get_receipts, get_receipt_by_id, post_receipt
 from crud.user import get_user_by_id
 from main import app
+import requests
+import json
 
 
 @app.get("/receipts/", response_model=list[Receipt])
@@ -27,9 +28,25 @@ def create_receipt(receipt: ReceiptCreate, db: Session = Depends(get_db)):
 def create_receipt(file: UploadFile = File(...)):
     if file is None:
         raise HTTPException(status_code=404, detail="Image is empty")
-    text = ocr_receipt(file)
 
-    return {'text': text}
+    payload = {'isOverlayRequired': False,
+               'apikey': "K88243565988957",
+               'language': "pol",
+               "OCREngine": 2,
+               'scale': True,
+               'isTable': True,
+               'detectOrientation': True,
+               }
+
+    r = requests.post('https://api.ocr.space/parse/image',
+                      files={file.filename: file.file},
+                      data=payload,
+                      )
+
+    content = r.content
+    parsed_text = json.loads(content)['ParsedResults'][0]['ParsedText']
+
+    return {"parsed_text": parsed_text}
 
 
 @app.get("/receipts/{receipt_id}", response_model=Receipt)
