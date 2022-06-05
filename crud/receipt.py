@@ -16,7 +16,6 @@ def post_receipt(db: Session, receipt: ReceiptCreate):
                                 address=receipt.address,
                                 date_add_receipt=receipt.date_add_receipt,
                                 date_shop_products=receipt.date_shop_products,
-                                number_receipt=receipt.number_receipt,
                                 NIP_number_shop=receipt.NIP_number_shop,
                                 owner_id=receipt.owner_id)
     db.add(db_receipt)

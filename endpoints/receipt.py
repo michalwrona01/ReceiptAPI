@@ -7,6 +7,7 @@ from crud.user import get_user_by_id
 from main import app
 import requests
 import json
+from receipt_ocr.re_patterns import *
 
 
 @app.get("/receipts/", response_model=list[Receipt])
@@ -45,8 +46,13 @@ def create_receipt(file: UploadFile = File(...)):
 
     content = r.content
     parsed_text = json.loads(content)['ParsedResults'][0]['ParsedText']
+    splitted_text = parsed_text.split('\t\r\n')
 
-    return {"parsed_text": parsed_text}
+    return {"shop_name": get_shop_name(splitted_text),
+            "address": get_address(parsed_text),
+            "nip_number": get_nip_number(parsed_text),
+            "products": get_products(splitted_text),
+            "date_add_receipt": get_date(parsed_text)}
 
 
 @app.get("/receipts/{receipt_id}", response_model=Receipt)

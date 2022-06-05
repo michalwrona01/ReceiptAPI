@@ -10,7 +10,6 @@ class ReceiptBase(BaseModel):
     address: str
     date_add_receipt: Optional[date] = Body(None)
     date_shop_products: Optional[datetime] = Body(None)
-    number_receipt: int
     NIP_number_shop: int
 
 
