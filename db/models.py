@@ -23,7 +23,6 @@ class Receipt(Base):
     address = Column(String)
     date_add_receipt = Column(Date, default=func.now())
     date_shop_products = Column(DateTime, default=func.now())
-    number_receipt = Column(Integer)
     NIP_number_shop = Column(Integer)
     owner_id = Column(Integer, ForeignKey("users.id"))
 
