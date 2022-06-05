@@ -1,7 +1,7 @@
 
 # [ReceiptAPI](https://receipt-api-public.azurewebsites.net)
 
-REST API for extracting data from pragueons and writing to the database
+REST API for extracting data from receipts and save to the database
 
 
 ## Tech Stack
