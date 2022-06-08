@@ -51,7 +51,7 @@ def create_receipt(file: UploadFile = File(...)):
     return {"shop_name": get_shop_name(splitted_text),
             "address": get_address(parsed_text),
             "nip_number": get_nip_number(parsed_text),
-            "products": get_products(splitted_text),
+            "products": get_product_name(get_products(splitted_text)),
             "date_add_receipt": get_date(parsed_text)}
 
 
