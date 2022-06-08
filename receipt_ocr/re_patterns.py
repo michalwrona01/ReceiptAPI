@@ -55,3 +55,24 @@ def get_products(text):
 def get_date(text):
     pattern = re.compile("([0-9]{4}-[0-9]{2}-[0-9]{2})", re.IGNORECASE)
     return pattern.findall(text)
+
+
+def get_product_name(products_text):
+    products = list()
+
+    for product_text in products_text:
+        pattern = re.compile("([a-zA-Z]+)\\t([0-9]+).*x([0-9]+),[0-9]+", re.IGNORECASE)
+        product_r = pattern.findall(product_text)
+
+        try:
+            {'name': product_r[0][0],
+             'count': product_r[0][1],
+             'price': product_r[0][2]}
+        except IndexError:
+            continue
+        else:
+            products.append({'name': product_r[0][0],
+                             'count': product_r[0][1],
+                             'price': product_r[0][2]})
+
+    return products
